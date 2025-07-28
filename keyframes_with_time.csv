@@ -1,0 +1,11 @@
+Frame,Label,Confidence,Time_sec
+64,LiftOff,0.890,2.133
+112,LiftOff,0.850,3.733
+121,LiftOff,0.870,4.033
+126,LiftOff,0.840,4.200
+131,LiftOff,0.840,4.367
+140,LiftOff,0.830,4.667
+264,LiftOff,0.910,8.800
+366,ThreeQuarterArmCircle,0.860,12.200
+375,Connection,0.833,12.500
+378,Release,0.860,12.600

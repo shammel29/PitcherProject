@@ -1,0 +1,37 @@
+import cv2
+import os
+
+# === CONFIG ===
+video_path = "resources/lucyPitch.mp4"
+output_folder = "extracted_frames"
+frame_interval = 5  # Save every 5 frames (adjust as needed)
+
+# === SETUP ===
+video_name = os.path.splitext(os.path.basename(video_path))[0]
+os.makedirs(output_folder, exist_ok=True)
+
+# === LOAD VIDEO ===
+cap = cv2.VideoCapture(video_path)
+frame_num = 0
+saved_frames = 0
+
+if not cap.isOpened():
+    print("Error: Could not open video.")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break  # End of video
+
+    # Save every Nth frame
+    if frame_num % frame_interval == 0:
+        filename = f"{video_name}_frame{frame_num}.jpg"
+        filepath = os.path.join(output_folder, filename)
+        cv2.imwrite(filepath, frame)
+        saved_frames += 1
+
+    frame_num += 1
+
+cap.release()
+print(f"Done. Saved {saved_frames} frames to '{output_folder}'.")

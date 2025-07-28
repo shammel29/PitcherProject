@@ -1,0 +1,12 @@
+# .gitignore
+__pycache__/
+*.pyc
+.vscode/
+.venv/
+*.sqlite3
+__MACOSX/
+*.mp4
+*.mov
+*.avi
+/tmp*
+*.png
