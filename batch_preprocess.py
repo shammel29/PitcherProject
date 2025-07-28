@@ -21,6 +21,15 @@ pose = mp_pose.Pose(static_image_mode=True)
 def extract_features(frame, prev_lm, fps):
     h, w, _ = frame.shape
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    try:
+        res = pose.process(rgb)
+    except ValueError as e:
+        # skip this frame if MediaPipe complains about timestamps
+        print(f"⚠️  Skipping frame due to MediaPipe timestamp error: {e}")
+        return None, prev_lm
+
+    if not res.pose_landmarks:
+        return None, prev_lm
     res = pose.process(rgb)
     if not res.pose_landmarks:
         return None, prev_lm
