@@ -6,4 +6,3 @@ pandas
 scikit-learn
 joblib
 tqdm
-cv2
