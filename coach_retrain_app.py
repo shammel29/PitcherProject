@@ -69,3 +69,30 @@ with col3:
 # ------------------------------
 current = snapshots[st.session_state.index]
 st.image(current["img"], caption=f"{current['label']} | Frame {current['frame']} | Conf {current['conf']:.2f}")
+
+# --------------------------
+# 🟢 Coach Feedback Section
+# --------------------------
+st.subheader("Coach Feedback")
+correct = st.radio("Was the model prediction correct?", ["✅ Correct", "❌ Incorrect"], horizontal=True)
+true_label = current["label"]
+if correct == "❌ Incorrect":
+    true_label = st.text_input("Enter the correct label:", value=current["label"])
+
+notes = st.text_area("Additional notes:", height=80)
+
+if st.button("💾 Save Feedback"):
+    with open(feedback_file, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([
+            video_name,
+            current["frame"],
+            current["label"],
+            correct == "✅ Correct",
+            true_label,
+            notes
+        ])
+    st.success("✅ Feedback saved! Move to next frame.")
+
+# Display progress
+st.sidebar.markdown(f"**Progress:** {st.session_state.index+1} / {len(snapshots)} frames reviewed")
