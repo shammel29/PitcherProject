@@ -80,9 +80,6 @@ st.image(current["img"], caption=f"{current['label']} | Frame {current['frame']}
 st.subheader("Coach Feedback")
 correct = st.radio("Was the model prediction correct?", ["✅ Correct", "❌ Incorrect"], horizontal=True)
 true_label = current["label"]
-if correct == "❌ Incorrect":
-    true_label = st.text_input("Enter the correct label:", value=current["label"])
-
 notes = st.text_area("Additional notes:", height=80)
 
 if st.button("💾 Save Feedback"):
